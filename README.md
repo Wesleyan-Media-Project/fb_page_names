@@ -42,7 +42,7 @@ The SQL script that was used to generate this table is available in the `fb_page
 
 As an illustration of the utility of the data, let's examine if there were cases when pages have traded names: a name that was owned by one page_id would become associated with a different page_id.
 
-The script takes the `FB_page_name_history.csv` file, splits the `all_names` string into individual page_names, joins the table with itself and keeps the rows where the page_ids were different.
+The script takes the `FB_page_name_history.csv` file, splits the `all_names` string into individual page_names, joins the table with itself and keeps the rows where the page_ids were different. As a data cleanup step, the script excludes the entries where the page name was empty, or where it contained the words "Marketplace" or "Instagram".
 
 As a final touch, the script chooses the rows where the names contained 'PAC' - an abbreviation for "Political Action Committee".
 

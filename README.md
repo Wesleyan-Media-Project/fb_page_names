@@ -33,9 +33,10 @@ Here is a screenshot of a few rows.
 
 <img width="886" alt="Screenshot 2023-08-21 at 9 54 51 AM" src="https://github.com/Wesleyan-Media-Project/fb_page_names/assets/17502191/09d99e83-226f-4225-81a3-5c7a3b7272ff">
 
-We anticipate that the `last_known_as` field will be especially useful. As was already mentioned above, when a page gets deleted, it still is reported in the aggregate report, but the page name field is empty. For somebody who is in possession of only a single CSV file with the aggregate report, it is impossible to find out (in an automated way) what names did this page use in the past.
+We anticipate that the `last_known_as` field will be especially useful. As was already mentioned above, when a page gets deleted, it is still reported in the aggregate report, but the page name field is empty. For somebody who is in possession of only a single CSV file with the aggregate report, it is impossible to find out (in an automated way) the names that were used by the page in the past.
 
 The SQL script that was used to generate this table is available in the `fb_page_name_history.sql` file.
+
 
 ## Possible applications
 
@@ -75,5 +76,5 @@ x %>% filter(stri_detect(all_names_x, fixed="PAC")) %>% write_csv("pac_demo.csv"
 ```
 And here is a screenshot of the `pac_demo.csv` opened in Excel:
 
-<img width="934" alt="Screenshot 2023-08-21 at 10 30 39 AM" src="https://github.com/Wesleyan-Media-Project/fb_page_names/assets/17502191/af798a16-17ac-45b5-852b-1bf870321d66">
+<img width="933" alt="Screenshot 2023-08-21 at 10 37 44 AM" src="https://github.com/Wesleyan-Media-Project/fb_page_names/assets/17502191/11880e1a-1e4a-46dc-8403-e42ca0620d7a">
 

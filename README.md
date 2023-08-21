@@ -76,3 +76,4 @@ x %>% filter(stri_detect(all_names_x, fixed="PAC")) %>% write_csv("pac_demo.csv"
 ```
 And here is a screenshot of the `pac_demo.csv` opened in Excel:
 
+<img width="933" alt="Screenshot 2023-08-21 at 10 39 53 AM" src="https://github.com/Wesleyan-Media-Project/fb_page_names/assets/17502191/b89bbc50-3677-49d8-b4aa-1f5c0214feac">

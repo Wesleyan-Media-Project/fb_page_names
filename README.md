@@ -27,7 +27,7 @@ The SQL script that was used to generate the data is contained in the `fb_page_n
 
 ## Page name history
 
-The CSV file with this table is 9 MB large and did not require compression. The table contains page_id, last non-empty name of the page, and the previous names separated by the equals sign `=` as a delimiter.
+The CSV file with this table is 9 MB large and did not require compression. The table contains page_id, last non-empty name of the page (last_known_as), and the previous names separated by the equals sign `=` as a delimiter (all_names).
 
 Here is a screenshot of a few rows.
 

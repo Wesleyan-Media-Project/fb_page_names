@@ -6,13 +6,13 @@ In this repo you will find data and SQL scripts showing the history of changes i
 
 ## Table of Contents
 
-- [Background](##Background)
+- [Background](https://github.com/Wesleyan-Media-Project/fb_page_names/tree/main#background)
 
-- [Data and Setup](#data)
-    - [Page name date spans](##Pagenamedatespans)
-    - [Possible applications](##Possibleapplications)
+- [Data and Setup](https://github.com/Wesleyan-Media-Project/fb_page_names/tree/main#data)
+    - [Page Name Date Spans](https://github.com/Wesleyan-Media-Project/fb_page_names/tree/main#%23Pagenamedatespans)
+    - [Page Name History](https://github.com/Wesleyan-Media-Project/fb_page_names/tree/main#page-name-history)
       
-- [Possible Applications](##Possibleapplications)
+- [Possible Applications](https://github.com/Wesleyan-Media-Project/fb_page_names/tree/main#possible-applications)
 
 
 ## Background
@@ -31,7 +31,7 @@ The csv files all rely on a SQL backend to create the table that is generated. T
 
 
 
-### Page name date spans
+### Page Name Date Spans
 
 To use this table, download the file `FB_page_name_date_spans.csv.zip` and unpack it. The resulting CSV file will be 143 MB large. 
 
@@ -43,7 +43,7 @@ For example, here is a screenshot of the rows referring to Rep. Cori Bush [Wikip
 
 The SQL script that was used to generate the data is contained in the `fb_page_name_data_spans.sql` file in the repo.
 
-### Page name history
+### Page Name History
 
 The CSV file with this table is 9 MB large and did not require compression. The table contains page_id, last non-empty name of the page, and the previous names separated by the equals sign `=` as a delimiter.
 

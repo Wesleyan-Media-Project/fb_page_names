@@ -1,7 +1,19 @@
-# fb_page_names
-Data and SQL scripts showing the history of changes in page names of FB advertisers
+# Wesleyan Media Project - fb_page_names
 
-This repository describes the known problems with changes in page names of Facebook advertisers.
+Welcome! This repo is part of the Cross-platform Election Advertising Transparency initiatIVE (CREATIVE) project. [CREATIVE](https://www.creativewmp.com/) is a joint infrastructure project of [WMP](https://mediaproject.wesleyan.edu/) and [privacy-tech-lab](https://privacytechlab.org/) at Wesleyan University. CREATIVE provides cross-platform integration and standardization of political ads collected from Google and Facebook.
+
+In this repo you will find data and SQL scripts showing the history of changes in page names of FB advertisers. This repository describes the known problems with changes in page names of Facebook advertisers. This is a part of step 1 of the data pipeline: Data Collection. You will not need any other repositories to run and fb_page_names.
+
+## Table of Contents
+
+- [Background](##Background)
+
+- [Data and Setup](#data)
+    - [Page name date spans](##Pagenamedatespans)
+    - [Possible applications](##Possibleapplications)
+      
+- [Possible Applications](##Possibleapplications)
+
 
 ## Background
 
@@ -13,7 +25,13 @@ This repository provides two CSV tables with information on the previous names o
 
 Facebook started including `page_id` field into the aggregate reports in July 2019 and our tables report page name changes between July 2019 and August 2023.
 
-## Page name date spans
+## Data and Setup
+
+The csv files all rely on a SQL backend to create the table that is generated. The corresponding sql file for each data file is outlined below. As stated in [fb_ad_imports](https://github.com/Wesleyan-Media-Project/fb_ads_import), the scripts will store data in an instance of MySQL (or MariaDB) that needs to be installed and running on your machine. In order to run the scripts, you will need to create the tables in a database in MySQL/MariaDB and enter some keyword values.
+
+
+
+### Page name date spans
 
 To use this table, download the file `FB_page_name_date_spans.csv.zip` and unpack it. The resulting CSV file will be 143 MB large. 
 
@@ -25,7 +43,7 @@ For example, here is a screenshot of the rows referring to Rep. Cori Bush [Wikip
 
 The SQL script that was used to generate the data is contained in the `fb_page_name_data_spans.sql` file in the repo.
 
-## Page name history
+### Page name history
 
 The CSV file with this table is 9 MB large and did not require compression. The table contains page_id, last non-empty name of the page, and the previous names separated by the equals sign `=` as a delimiter.
 

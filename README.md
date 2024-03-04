@@ -2,18 +2,22 @@
 
 Welcome! This repo is part of the Cross-platform Election Advertising Transparency initiatIVE (CREATIVE) project. [CREATIVE](https://www.creativewmp.com/) is a joint infrastructure project of [WMP](https://mediaproject.wesleyan.edu/) and [privacy-tech-lab](https://privacytechlab.org/) at Wesleyan University. CREATIVE provides cross-platform integration and standardization of political ads collected from Google and Facebook.
 
-In this repo you will find data and SQL scripts showing the history of changes in page names of FB advertisers. This repository describes the known problems with changes in page names of Facebook advertisers. This is a part of step 1 of the data pipeline: Data Collection. You will not need any other repositories to run and fb_page_names.
+In this repo you will find data and SQL scripts showing the history of changes in page names of FB advertisers. This repository describes the known problems with changes in page names of Facebook advertisers.
+
+This is a part of step 1 of the data pipeline: Data Collection. You will not need any other repositories to run and fb_page_names.
+
+![A picture of the repo pipeline with this repo highlighted](Creative_Pipelines.png)
 
 ## Table of Contents
 
 - [Background](https://github.com/Wesleyan-Media-Project/fb_page_names/tree/main#background)
 
-- [Data and Setup](https://github.com/Wesleyan-Media-Project/fb_page_names/tree/main#data)
-    - [Page Name Date Spans](https://github.com/Wesleyan-Media-Project/fb_page_names/tree/main#%23Pagenamedatespans)
-    - [Page Name History](https://github.com/Wesleyan-Media-Project/fb_page_names/tree/main#page-name-history)
-      
-- [Possible Applications](https://github.com/Wesleyan-Media-Project/fb_page_names/tree/main#possible-applications)
+- [Objective](#objective)
 
+- [Data and Setup](https://github.com/Wesleyan-Media-Project/fb_page_names/tree/main#data)
+  - [Page Name Date Spans](https://github.com/Wesleyan-Media-Project/fb_page_names/tree/main#%23Pagenamedatespans)
+  - [Page Name History](https://github.com/Wesleyan-Media-Project/fb_page_names/tree/main#page-name-history)
+- [Possible Applications](https://github.com/Wesleyan-Media-Project/fb_page_names/tree/main#possible-applications)
 
 ## Background
 
@@ -25,15 +29,24 @@ This repository provides two CSV tables with information on the previous names o
 
 Facebook started including `page_id` field into the aggregate reports in July 2019 and our tables report page name changes between July 2019 and August 2023.
 
+### Objective
+
+Each of our repos belongs to one or more of the following categories:
+
+- Data Collection
+- Data Processing
+- Data Classification
+- Compiled Final Data
+
+This repo is part of the Data Collection step.
+
 ## Data and Setup
 
 The csv files all rely on a SQL backend to create the table that is generated. The corresponding sql file for each data file is outlined below. As stated in [fb_ad_imports](https://github.com/Wesleyan-Media-Project/fb_ads_import), the scripts will store data in an instance of MySQL (or MariaDB) that needs to be installed and running on your machine. In order to run the scripts, you will need to create the tables in a database in MySQL/MariaDB and enter some keyword values.
 
-
-
 ### Page Name Date Spans
 
-To use this table, download the file `FB_page_name_date_spans.csv.zip` and unpack it. The resulting CSV file will be 143 MB large. 
+To use this table, download the file `FB_page_name_date_spans.csv.zip` and unpack it. The resulting CSV file will be 143 MB large.
 
 For each page id that had a change in its name, there is a row showing the page_id, page_name, and the date span when this name was in effect. The goal of this table is to assist analysts who have data for a past period but need to find out under what name did an advertiser operate at the time.
 
@@ -55,7 +68,6 @@ We anticipate that the `last_known_as` field will be especially useful. As was a
 
 The SQL script that was used to generate this table is available in the `fb_page_name_history.sql` file.
 
-
 ## Possible applications
 
 As an illustration of the utility of the data, let's examine if there were cases when pages have traded names: a name that was owned by one page_id would become associated with a different page_id.
@@ -63,7 +75,6 @@ As an illustration of the utility of the data, let's examine if there were cases
 The script takes the `FB_page_name_history.csv` file, splits the `all_names` string into individual page_names, joins the table with itself and keeps the rows where the page_ids were different. As a data cleanup step, the script excludes the entries where the page name was empty, or where it contained the words "Marketplace" or "Instagram".
 
 As a final touch, the script chooses the rows where the names contained 'PAC' - an abbreviation for "Political Action Committee".
-
 
 ```{r}
 library(dplyr)
@@ -74,24 +85,25 @@ library(stringi)
 df = read_csv("FB_page_name_history.csv",
                          col_types = "ccc")
 
-d = df %>% mutate(pn = stri_split(all_names, fixed="=")) %>% 
-  unnest(pn) %>% 
-  filter(pn != "") %>% 
-  filter(!stri_detect(all_names, regex="(?i)Marketplace|Instagram")) %>% 
+d = df %>% mutate(pn = stri_split(all_names, fixed="=")) %>%
+  unnest(pn) %>%
+  filter(pn != "") %>%
+  filter(!stri_detect(all_names, regex="(?i)Marketplace|Instagram")) %>%
   select(-last_known_as)
-  
-x = d %>% 
-  inner_join(d, 
-             by="pn", 
+
+x = d %>%
+  inner_join(d,
+             by="pn",
              suffix=c("_x", "_y"),
-             relationship = "many-to-many") %>% 
-  filter(page_id_x != page_id_y) %>% 
+             relationship = "many-to-many") %>%
+  filter(page_id_x != page_id_y) %>%
   distinct(pn, page_id_x, all_names_x, page_id_y, all_names_y)
-  
+
 
 x %>% filter(stri_detect(all_names_x, fixed="PAC")) %>% write_csv("pac_demo.csv")
 
 ```
+
 And here is a screenshot of the `pac_demo.csv` opened in Excel:
 
 <img width="933" alt="Screenshot 2023-08-21 at 10 39 53 AM" src="https://github.com/Wesleyan-Media-Project/fb_page_names/assets/17502191/b89bbc50-3677-49d8-b4aa-1f5c0214feac">

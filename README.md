@@ -1,9 +1,9 @@
-# Wesleyan Media Project - fb_page_names
+# CREATIVE --- fb_page_names
 
 Welcome! This repository contains data and SQL scripts showing the history of changes in page names of Facebook advertisers.
 The scripts provided here are intended to help journalists, academic researchers, and others interested in the democratic process to understand how Wesleyan Media Project track the continuity of advertisers' presence on Facebook.
 
-This repo is a part of the [Cross-platform Election Advertising Transparency Initiative (CREATIVE)](https://www.creativewmp.com/). CREATIVE is an academic research project that has the goal of providing the public with analysis tools for more transparency of political ads across online platforms. In particular, CREATIVE provides cross-platform integration and standardization of political ads collected from Google and Facebook. CREATIVE is a joint project of the [Wesleyan Media Project (WMP)](https://mediaproject.wesleyan.edu/) and the [privacy-tech-lab](https://privacytechlab.org/) at [Wesleyan University](https://www.wesleyan.edu).
+This repo is part of the [Cross-platform Election Advertising Transparency Initiative (CREATIVE)](https://www.creativewmp.com/). CREATIVE is an academic research project that has the goal of providing the public with analysis tools for more transparency of political ads across online platforms. In particular, CREATIVE provides cross-platform integration and standardization of political ads collected from Google and Facebook. CREATIVE is a joint project of the [Wesleyan Media Project (WMP)](https://mediaproject.wesleyan.edu/) and the [privacy-tech-lab](https://privacytechlab.org/) at [Wesleyan University](https://www.wesleyan.edu).
 
 To analyze the different dimensions of political ad transparency we have developed an analysis pipeline. The scripts in this repo are part of the Compiled Final Data in our pipeline.
 
@@ -20,11 +20,11 @@ To analyze the different dimensions of political ad transparency we have develop
 
 ## 1. Background
 
-As part of monitoring the electoral campaigns in the United States, Wesleyan Media Project downloads and stores the Facebook aggregate reports that are available from this [page](https://www.facebook.com/ads/library/report). Within the all aggregate reports, the Lifelong ("All Dates") report is particularly important because it provides the total amount spent by a political advertiser on the platform. WMP stores these reports in a database and uses them to compute exact spend by advertisers within specific time periods, for instance, general campaign of 2022. You can read more about the aggregate reports and how they are processed in the [fb_agg_reports_import](https://github.com/Wesleyan-Media-Project/fb_agg_reports_import) repository.
+As part of monitoring the electoral campaigns in the United States, Wesleyan Media Project downloads and stores the Facebook aggregate reports that are available from the [official Facebook page](https://www.facebook.com/ads/library/report). Within the all aggregate reports, the Lifelong ("All Dates") report is particularly important because it provides the total amount spent by a political advertiser on the platform. WMP stores these reports in a database and uses them to compute exact spend by advertisers within specific time periods, for instance, general campaign of 2022. You can read more about the aggregate reports and how they are processed in the [fb_agg_reports_import](https://github.com/Wesleyan-Media-Project/fb_agg_reports_import) repository.
 
 When an organization or individual starts advertising on Facebook, they are assigned a unique "Page ID" and can choose a name for their "Facebook Page" (which represents their presence on the platform). However, advertisers can change the name of their Facebook Page at any time, and the Ads Library Report only shows the current name at the time the report was generated.
 
-This can make us difficult to track how an advertiser's name may have changed over time since the report doesn't provide a history of previous names. Additionally, if a Facebook Page is taken down or encounters a temporary issue, the report may show an empty string (no name) instead of the actual name.
+This can make it difficult to track how an advertiser's name may have changed over time since the report does not provide a history of previous names. Additionally, if a Facebook Page is taken down or encounters a temporary issue, the report may show an empty string (no name) instead of the actual name.
 
 To address this issue, this repository provides two CSV tables `FB_page_name_history.csv` and `FB_page_name_date_spans` that contain information about previous names used by Facebook Pages between July 2019 (when Facebook started including Page IDs `page_id` in the report) and August 2023. One of these tables, `FB_page_name_date_spans` is provided as a zipped file `FB_page_names_date_spans.csv.zip`due to its large size.
 
@@ -32,7 +32,7 @@ By cross-referencing the information in these tables with the Ads Library Report
 
 ## 2. Data and Setup
 
-The csv files all rely on a SQL backend to create the table that is generated. The corresponding sql file for each data file is outlined below. As stated in [fb_ad_imports](https://github.com/Wesleyan-Media-Project/fb_ads_import), the scripts will store data in an instance of MySQL (or MariaDB) that needs to be installed and running on your machine. In order to run the scripts, you will need to create the tables in a database in MySQL/MariaDB and enter some keyword values. We recommend you to run all the [Data Collection Pipeline](https://github.com/Wesleyan-Media-Project/creative_overview?tab=readme-ov-file#step-1-data-collection) repositories first before running this repository to ensure you have the necessary data and tables set up in your database.
+The csv files all rely on a SQL backend to create the table that is generated. The corresponding sql file for each data file is outlined below. As stated in the [fb_ad_imports repo](https://github.com/Wesleyan-Media-Project/fb_ads_import), the scripts will store data in an instance of MySQL (or MariaDB) that needs to be installed and running on your machine. In order to run the scripts, you will need to create the tables in a database in MySQL/MariaDB and enter some keyword values. We recommend you to run all the [Data Collection Pipeline repos](https://github.com/Wesleyan-Media-Project/creative_overview?tab=readme-ov-file#step-1-data-collection) first before running this repository to ensure you have the necessary data and tables set up in your database.
 
 ### Page Name Date Spans
 
@@ -106,7 +106,7 @@ And here is a screenshot of the `pac_demo.csv` opened in Excel:
 
 ## 4. Thank You
 
-<p align="center"><strong>We would like to thank our financial supporters!</strong></p><br>
+<p align="center"><strong>We would like to thank our supporters!</strong></p><br>
 
 <p align="center">This material is based upon work supported by the National Science Foundation under Grant Numbers 2235006, 2235007, and 2235008.</p>
 

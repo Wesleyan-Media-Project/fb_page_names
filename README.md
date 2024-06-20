@@ -15,7 +15,7 @@ To analyze the different dimensions of political ad transparency we have develop
 - [2. Data and Setup](#2-data-and-setup)
   - [Page Name Date Spans](#page-name-date-spans)
   - [Page Name History](#page-name-history)
-- [3. Possible applications](#3-possible-applications)
+- [3. Possible Data applications & Analysis](#3-possible-data-applications--analysis)
 - [4. Thank You](#4-thank-you)
 
 ## 1. Background

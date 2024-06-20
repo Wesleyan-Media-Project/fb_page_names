@@ -30,7 +30,7 @@ def filter_data(df, text):
     # Filter the DataFrame based on the provided text
     return df[df.apply(lambda row: row.astype(str).str.contains(text, case=False, na=False).any(), axis=1)]
 
-def save_to_excel(df, file_prefix='Readcsvgz_Output'):
+def save_to_excel(df, file_prefix='Readcsv_Output'):
     # Save the filtered DataFrame to an Excel file with a timestamp
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     excel_file_path = f'{file_prefix}_{timestamp}.xlsx'

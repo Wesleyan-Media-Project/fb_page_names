@@ -134,7 +134,7 @@ python3 readcsv.py --file FB_page_names_date_spans.csv
 
 You can customize the behavior of the script by providing additional command-line arguments:
 
-- `--file`: Path to the csv.gz file (required).
+- `--file`: Path to the csv file (required).
 - `--skiprows`: Number of rows to skip at the start of the file (default: 0).
 - `--nrows`: Number of rows to read from the file (default: 1000).
 - `--filter_text`: Text to filter the rows (case-insensitive). If empty, no filtering is applied (default: no filter).

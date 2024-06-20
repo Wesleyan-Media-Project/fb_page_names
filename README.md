@@ -64,7 +64,7 @@ Here is a screenshot of a few rows.
 
 We anticipate that the `last_known_as` field will be especially useful. As was already mentioned above, when a page gets deleted, it is still reported in the aggregate report, but the page name field is empty. For somebody who is in possession of only a single CSV file with the aggregate report, it is impossible to find out (in an automated way) the names that were used by the page in the past.
 
-## 3. Possible applications
+## 3. Possible Data applications & Analysis
 
 As an illustration of the utility of the data, let's examine if there were cases when pages have traded names: a name that was owned by one page_id would become associated with a different page_id.
 
@@ -103,6 +103,73 @@ x %>% filter(stri_detect(all_names_x, fixed="PAC")) %>% write_csv("pac_demo.csv"
 And here is a screenshot of the `pac_demo.csv` opened in Excel:
 
 <img width="933" alt="Screenshot 2023-08-21 at 10 39 53 AM" src="https://github.com/Wesleyan-Media-Project/fb_page_names/assets/17502191/b89bbc50-3677-49d8-b4aa-1f5c0214feac">
+
+### Interactive Data Analysis
+
+The `csv` files produced in this repo are usually large and may contain millions of rows. In case you are interested in looking at the data in a more interactive way, we have provided two scripts, [readcsv.py](https://github.com/Wesleyan-Media-Project/fb_page_names/blob/main/readcsv.py) and [readcsvGUI](https://github.com/Wesleyan-Media-Project/fb_page_names/blob/main/readcsvGUI.py), in the root folder of this repo. If you want to analyze the data `FB_page_name_date_spans.csv.zip`, please make sure you unzip it first as these scripts only read `csv` files.
+
+#### Script `readcsv.py`
+
+The script `readcsv.py` is a Python script that reads and filters the `csv` files and saves the filtered data in an Excel file. It has the following features:
+
+- Load a specified number of rows from a CSV file.
+- Skip a specified number of initial rows.
+- Filter rows based on the presence of a specified text (case-insensitive).
+
+##### Usage
+
+To run the script, you need to first install the required packages:
+
+```bash
+pip install pandas
+```
+
+After installing the required packages, you can run the script with the command line arguments.
+
+For example, to run the script with the default arguments (start from row 0, read 1000 rows, no text filter), you can enter the following command in your terminal:
+
+```bash
+python3 readcsv.py --file FB_page_names_date_spans.csv
+```
+
+You can customize the behavior of the script by providing additional command-line arguments:
+
+- `--file`: Path to the csv.gz file (required).
+- `--skiprows`: Number of rows to skip at the start of the file (default: 0).
+- `--nrows`: Number of rows to read from the file (default: 1000).
+- `--filter_text`: Text to filter the rows (case-insensitive). If empty, no filtering is applied (default: no filter).
+
+For example, to filter rows containing the text "Biden", starting from row 0 and reading 100000 rows:
+
+```bash
+python3 readcsv.py --file FB_page_names_date_spans.csv --nrows 100000 --filter_text Biden
+```
+
+To see a help message with the description of all available arguments, you can run the following command:
+
+```bash
+python3 readcsv.py --h
+```
+
+#### Script `readcsvGUI.py`
+
+In addition to the `readcsv.py` script, we also provide a GUI version of the script that displays the data in a graphical user interface via [PandasGui](https://pypi.org/project/pandasgui/).
+
+To run the `readcsvGUI.py` script, you need to first install the required packages:
+
+```bash
+pip install pandas pandasgui
+```
+
+After installing the required packages, you can run the script with the following command:
+
+```bash
+python3 readcsvGUI.py
+```
+
+Here is an example of the GUI interface:
+![A picture of the PandasGui interface](PandasGUI_example.png)
+For more information on how to use the GUI interface, please refer to the [PandasGui documentation](https://pypi.org/project/pandasgui/).
 
 ## 4. Thank You
 

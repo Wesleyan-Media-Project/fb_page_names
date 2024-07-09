@@ -4,7 +4,7 @@ import sys
 from pandasgui import show
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(description="Open a csv.gz file in a GUI for easy viewing and manipulation.")
+    parser = argparse.ArgumentParser(description="Open a csv file in a GUI for easy viewing and manipulation.")
     parser.add_argument('--file', type=str, required=True, help='Path to the CSV file.')
     return parser.parse_args()
 

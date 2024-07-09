@@ -35,7 +35,7 @@ def filter_data(df, text):
     # Filter the DataFrame based on the provided text
     return df[df.apply(lambda row: row.astype(str).str.contains(text, case=False, na=False).any(), axis=1)]
 
-def save_to_excel(df, file_prefix='Readcsvgz_Output'):
+def save_to_excel(df, file_prefix='Readcsv_Output'):
     # Save the DataFrame to multiple Excel files if it exceeds the row limit
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     if df.shape[0] <= CHUNK_SIZE:

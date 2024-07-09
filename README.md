@@ -108,9 +108,9 @@ And here is a screenshot of the `pac_demo.csv` opened in Excel:
 
 The `csv` files produced in this repo are usually large and may contain millions of rows. In case you are interested in looking at the data in a more interactive way, we have provided two scripts, [readcsv.py](https://github.com/Wesleyan-Media-Project/fb_page_names/blob/main/readcsv.py) and [readcsvGUI](https://github.com/Wesleyan-Media-Project/fb_page_names/blob/main/readcsvGUI.py), in the root folder of this repo. If you want to analyze the data `FB_page_name_date_spans.csv.zip`, please make sure you unzip it first as these scripts only read `csv` files.
 
-### Script `readcsvgz.py`
+### Script `readcsv.py`
 
-The script `readcsvgz.py` is a Python script that reads and filters the `csv.gz` files and saves the filtered data in an Excel file. It has the following features:
+The script `readcsv.py` is a Python script that reads and filters the `csv` files and saves the filtered data in an Excel file. It has the following features:
 
 - Load a specified number of rows from a CSV file.
 - Skip a specified number of initial rows to read the data.
@@ -129,12 +129,12 @@ After installing the required packages, you can run the script with the command 
 For example, to run the script with the default arguments (start from row 0, read 10000 rows, no text filter), you can enter the following command in your terminal:
 
 ```bash
-python3 readcsvgz.py --file FB_page_names_date_spans.csv
+python3 readcsv.py --file FB_page_names_date_spans.csv
 ```
 
 You can customize the behavior of the script by providing additional command-line arguments:
 
-- `--file`: Path to the csv.gz file (required).
+- `--file`: Path to the csv file (required).
 - `--skiprows`: Number of rows to skip at the start of the file (default: 0).
 - `--nrows`: Number of rows to read from the file (default: Read 10000 rows in the data).
 - `--filter_text`: Text to filter the rows (case-insensitive). If empty, no filtering is applied (default: No filter).
@@ -142,20 +142,20 @@ You can customize the behavior of the script by providing additional command-lin
 For example, to filter rows containing the text "Biden", starting from row 0 and reading 100000 rows:
 
 ```bash
-python3 readcsvgz.py --file --file FB_page_names_date_spans.csv --nrows 100000 --filter_text Biden
+python3 readcsv.py --file --file FB_page_names_date_spans.csv --nrows 100000 --filter_text Biden
 ```
 
 To see a help message with the description of all available arguments, you can run the following command:
 
 ```bash
-python3 readcsvgz.py --h
+python3 readcsv.py --h
 ```
 
 Please note that this script may take a while (>10 min) to run depending on the size of the data and the number of rows you requested. If you request the script to read more than 1048570 rows, the output would be saved in multiple Excel files due to the maximum number of rows Excel can handle.
 
 ### Script `readcsvGUI.py`
 
-In addition to the `readcsvgz.py` script, we also provide a GUI version of the script that displays the data in a graphical user interface via [PandasGui](https://pypi.org/project/pandasgui/).
+In addition to the `readcsv.py` script, we also provide a GUI version of the script that displays the data in a graphical user interface via [PandasGui](https://pypi.org/project/pandasgui/).
 
 To run the `readcsvGUI.py` script, you need to first install the required packages:
 

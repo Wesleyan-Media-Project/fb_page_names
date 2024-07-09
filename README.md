@@ -108,15 +108,15 @@ And here is a screenshot of the `pac_demo.csv` opened in Excel:
 
 The `csv` files produced in this repo are usually large and may contain millions of rows. In case you are interested in looking at the data in a more interactive way, we have provided two scripts, [readcsv.py](https://github.com/Wesleyan-Media-Project/fb_page_names/blob/main/readcsv.py) and [readcsvGUI](https://github.com/Wesleyan-Media-Project/fb_page_names/blob/main/readcsvGUI.py), in the root folder of this repo. If you want to analyze the data `FB_page_name_date_spans.csv.zip`, please make sure you unzip it first as these scripts only read `csv` files.
 
-#### Script `readcsv.py`
+### Script `readcsvgz.py`
 
-The script `readcsv.py` is a Python script that reads and filters the `csv` files and saves the filtered data in an Excel file. It has the following features:
+The script `readcsvgz.py` is a Python script that reads and filters the `csv.gz` files and saves the filtered data in an Excel file. It has the following features:
 
 - Load a specified number of rows from a CSV file.
-- Skip a specified number of initial rows.
+- Skip a specified number of initial rows to read the data.
 - Filter rows based on the presence of a specified text (case-insensitive).
 
-##### Usage
+#### Usage
 
 To run the script, you need to first install the required packages:
 
@@ -126,34 +126,36 @@ pip install pandas
 
 After installing the required packages, you can run the script with the command line arguments.
 
-For example, to run the script with the default arguments (start from row 0, read 1000 rows, no text filter), you can enter the following command in your terminal:
+For example, to run the script with the default arguments (start from row 0, read 10000 rows, no text filter), you can enter the following command in your terminal:
 
 ```bash
-python3 readcsv.py --file FB_page_names_date_spans.csv
+python3 readcsvgz.py --file FB_page_names_date_spans.csv
 ```
 
 You can customize the behavior of the script by providing additional command-line arguments:
 
-- `--file`: Path to the csv file (required).
+- `--file`: Path to the csv.gz file (required).
 - `--skiprows`: Number of rows to skip at the start of the file (default: 0).
-- `--nrows`: Number of rows to read from the file (default: 1000).
-- `--filter_text`: Text to filter the rows (case-insensitive). If empty, no filtering is applied (default: no filter).
+- `--nrows`: Number of rows to read from the file (default: Read 10000 rows in the data).
+- `--filter_text`: Text to filter the rows (case-insensitive). If empty, no filtering is applied (default: No filter).
 
 For example, to filter rows containing the text "Biden", starting from row 0 and reading 100000 rows:
 
 ```bash
-python3 readcsv.py --file FB_page_names_date_spans.csv --nrows 100000 --filter_text Biden
+python3 readcsvgz.py --file --file FB_page_names_date_spans.csv --nrows 100000 --filter_text Biden
 ```
 
 To see a help message with the description of all available arguments, you can run the following command:
 
 ```bash
-python3 readcsv.py --h
+python3 readcsvgz.py --h
 ```
 
-#### Script `readcsvGUI.py`
+Please note that this script may take a while (>10 min) to run depending on the size of the data and the number of rows you requested. If you request the script to read more than 1048570 rows, the output would be saved in multiple Excel files due to the maximum number of rows Excel can handle.
 
-In addition to the `readcsv.py` script, we also provide a GUI version of the script that displays the data in a graphical user interface via [PandasGui](https://pypi.org/project/pandasgui/).
+### Script `readcsvGUI.py`
+
+In addition to the `readcsvgz.py` script, we also provide a GUI version of the script that displays the data in a graphical user interface via [PandasGui](https://pypi.org/project/pandasgui/).
 
 To run the `readcsvGUI.py` script, you need to first install the required packages:
 
@@ -161,11 +163,28 @@ To run the `readcsvGUI.py` script, you need to first install the required packag
 pip install pandas pandasgui
 ```
 
-After installing the required packages, you can run the script with the following command:
+If you are working on a non-Windows computer, you will need to go into the file `.../site-packages/pandasgui/constants.py` and change the line of code
 
 ```bash
-python3 readcsvGUI.py
+SHORTCUT_PATH = os.path.join(os.getenv('APPDATA'), 'Microsoft/Windows/Start Menu/Programs/PandasGUI.lnk')
 ```
+
+to instead be
+
+```bash
+if sys.platform == 'win32':
+    SHORTCUT_PATH = os.path.join(os.getenv('APPDATA'), 'Microsoft/Windows/Start Menu/Programs/PandasGUI.lnk')
+else:
+    SHORTCUT_PATH = NonePY_INTERPRETTER_PATH = os.path.join(os.path.dirname(sys.executable), 'python.exe')
+```
+
+After installing the required packages and potentially changing the SHORTCUT_PATH, you can run the script with the following command:
+
+```bash
+python3 readcsvGUI.py --file FB_page_names_date_spans.csv
+```
+
+You can change the file to read by replacing the path `FB_page_names_date_spans.csv` to other file paths.
 
 Here is an example of the GUI interface:
 ![A picture of the PandasGui interface](PandasGUI_example.png)
